@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GraphQLDemo.Data.Entities;
 
 namespace GraphQLDemo.Data.Dto
@@ -24,7 +21,7 @@ namespace GraphQLDemo.Data.Dto
     {
         public OrderDtoValidator()
         {
-            RuleFor(x => x.Id).NotNull();
+            RuleFor(x => x.Id).NotNull().GreaterThan(0);
             RuleFor(x => x.TotalDue).NotNull().GreaterThanOrEqualTo(0);
             RuleFor(x => x.Comment).Length(0, 2000);
         }

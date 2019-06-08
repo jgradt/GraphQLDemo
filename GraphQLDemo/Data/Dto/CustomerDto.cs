@@ -17,7 +17,7 @@ namespace GraphQLDemo.Models
     {
         public CustomerDtoValidator()
         {
-            RuleFor(x => x.Id).NotNull();
+            RuleFor(x => x.Id).NotNull().GreaterThan(0);
             RuleFor(x => x.FirstName).NotNull().Length(1, 50);
             RuleFor(x => x.LastName).NotNull().Length(1, 50);
             RuleFor(x => x.Email).EmailAddress().MaximumLength(150);

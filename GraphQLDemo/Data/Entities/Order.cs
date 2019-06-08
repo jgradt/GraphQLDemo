@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GraphQLDemo.Data.Entities
 {
@@ -18,6 +16,7 @@ namespace GraphQLDemo.Data.Entities
         public DateTime LastUpdatedDate { get; set; }
 
         public Customer Customer { get; set; }
+        public List<OrderDetail> Details { get; set; }
     }
 
     public enum OrderStatus
