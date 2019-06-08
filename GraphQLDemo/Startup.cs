@@ -13,6 +13,8 @@ using FluentValidation.AspNetCore;
 using WebApiDemo.Infrastructure.Configuration;
 using WebApiDemo.Data.Repositories;
 using WebApiDemo.Infrastructure.Errors;
+using GraphiQl;
+using GraphQLDemo.Data.GraphQL;
 
 namespace WebApiDemo
 {
@@ -63,6 +65,14 @@ namespace WebApiDemo
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddSingleton<AppConfig, AppConfig>();
 
+            //GraphQL types
+            services.AddScoped<GraphQL.IDependencyResolver>(s => new GraphQL.FuncDependencyResolver(s.GetRequiredService));
+
+            services.AddScoped<GraphQL.Types.ISchema, QuerySchema>();
+            services.AddScoped<GraphQLQuery>();
+            services.AddScoped<CustomerGraphType>();
+            services.AddScoped<OrderGraphType>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,6 +95,8 @@ namespace WebApiDemo
                     .AllowAnyMethod()
                     .AllowCredentials()
             );
+
+            app.UseGraphiQl("/graphql");
 
             app.UseMvc();
 
