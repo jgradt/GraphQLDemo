@@ -12,7 +12,7 @@ namespace GraphQLDemo.Data
 
         public static void AddDatabaseSeedData(DemoDbContext dbContext)
         {
-            // see: https://www.jerriepelser.com/blog/creating-test-data-with-nbuilder-and-faker/
+            // see also: https://www.jerriepelser.com/blog/creating-test-data-with-nbuilder-and-faker/
 
 
             // customers
@@ -69,8 +69,8 @@ namespace GraphQLDemo.Data
                     .All()
                         .With(o => o.Customer = Pick<Customer>.RandomItemFrom(customerList))
                         .With(o => o.OrderDate = DateTime.Today.AddDays(-dayGenerator.Next(0, 60)))
-                        .With(o => o.DeliveredDate = o.OrderDate.AddDays(dayGenerator.Next(1,8)))
-                        .With(o => o.TotalDue = totalGenerator.Next(0.01m, 500.00m))
+                        .With(o => o.DeliveredDate = o.Status != OrderStatus.Delivered ? (DateTime?)null : o.OrderDate.AddDays(dayGenerator.Next(1,8)))
+                        //.With(o => o.TotalDue = totalGenerator.Next(0.01m, 500.00m))
                         .With(o => o.Comment = phraseGenerator.Phrase(30))
                     .Build();
 
@@ -90,7 +90,7 @@ namespace GraphQLDemo.Data
                     .All()
                         .With(o => o.Supplier = Pick<Supplier>.RandomItemFrom(supplierList))
                         .With(o => o.ProductName = string.Join(" ", Faker.Lorem.Words(2)))
-                        .With(o => o.UnitPrice = unitPriceGenerator.Next(1.00m, 50.00m))
+                        .With(o => o.UnitPrice = Math.Round(unitPriceGenerator.Next(1.00m, 50.00m),2))
                         .With(o => o.Discontinued = false)
                     .Random(15)
                         .With(o => o.Discontinued = true)
@@ -109,7 +109,6 @@ namespace GraphQLDemo.Data
                 var orderDetails = Builder<Data.Entities.OrderDetail>.CreateListOfSize(2000)
                     .All()
                         .With(o => o.Product = Pick<Product>.RandomItemFrom(productList))
-                        //.With(o => o.Order = Pick<Order>.RandomItemFrom(orderList))
                         .With(o => o.Quantity = quantityGenerator.Next(1, 10))
                     .Build();
 
