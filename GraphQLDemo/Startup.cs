@@ -15,6 +15,7 @@ using GraphQLDemo.Data.Repositories;
 using GraphQLDemo.Infrastructure.Errors;
 using GraphiQl;
 using GraphQLDemo.Data.GraphQL;
+using GraphQL.Server;
 
 namespace WebApiDemo
 {
@@ -67,12 +68,12 @@ namespace WebApiDemo
 
             //GraphQL types
             services.AddScoped<GraphQL.IDependencyResolver>(s => new GraphQL.FuncDependencyResolver(s.GetRequiredService));
-
             services.AddScoped<GraphQL.Types.ISchema, QuerySchema>();
-            services.AddScoped<GraphQLQuery>();
-            services.AddScoped<CustomerGraphType>();
-            services.AddScoped<OrderGraphType>();
-
+            services.AddGraphQL(x =>
+            {
+                x.ExposeExceptions = true; 
+            })
+            .AddGraphTypes(ServiceLifetime.Scoped);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

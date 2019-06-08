@@ -30,7 +30,6 @@ namespace GraphQLDemo.Controllers
                 _.OperationName = queryRequest.OperationName;
                 _.UserContext = new GraphQLUserContext();
                 _.Inputs = queryRequest.Variables.ToInputs();
-                _.ExposeExceptions = true;
             });
 
             if (result.Errors?.Count > 0)
