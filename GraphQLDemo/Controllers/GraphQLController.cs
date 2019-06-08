@@ -13,23 +13,15 @@ namespace GraphQLDemo.Controllers
     [Route("graphql")]
     public class GraphQLController : Controller
     {
-        private GraphQLQuery _graphQLQuery;
         private ISchema _schema;
 
-        public GraphQLController(GraphQLQuery graphQLQuery, ISchema schema)
+        public GraphQLController(ISchema schema)
         {
-            _graphQLQuery = graphQLQuery;
             _schema = schema;
         }
 
         public async Task<IActionResult> Post([FromBody] GraphQLRequest queryRequest)
         {
-            //var inputs = query.Variables.ToInputs();
-
-            //var schema = new Schema
-            //{
-            //    Query = _graphQLQuery
-            //};
 
             var result = await new DocumentExecuter().ExecuteAsync(_ =>
             {

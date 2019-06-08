@@ -110,7 +110,7 @@ namespace GraphQLDemo.Data.GraphQL
           : base(resolver)
         {
             Query = resolver.Resolve<GraphQLQuery>();
-            //Mutation = resolver.Resolve<StarWarsMutation>();
+            //Mutation = resolver.Resolve<GraphQLMutation>();
         }
     }
 
