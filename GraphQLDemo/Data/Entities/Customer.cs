@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebApiDemo.Data.Entities
+namespace GraphQLDemo.Data.Entities
 {
     public class Customer : IDataEntity
     {

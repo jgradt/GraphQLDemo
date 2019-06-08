@@ -1,7 +1,7 @@
-﻿using WebApiDemo.Data.Entities;
+﻿using GraphQLDemo.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebApiDemo.Data
+namespace GraphQLDemo.Data
 {
     public class DemoDbContext : DbContext
     {

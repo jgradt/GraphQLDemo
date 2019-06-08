@@ -1,6 +1,6 @@
-﻿using WebApiDemo.Data.Entities;
+﻿using GraphQLDemo.Data.Entities;
 
-namespace WebApiDemo.Data.Repositories
+namespace GraphQLDemo.Data.Repositories
 {
     public interface ICustomerRepository : IBaseDataRepository<Customer>
     {

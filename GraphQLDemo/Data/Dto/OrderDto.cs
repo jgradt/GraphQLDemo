@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApiDemo.Data.Entities;
+using GraphQLDemo.Data.Entities;
 
-namespace WebApiDemo.Data.Dto
+namespace GraphQLDemo.Data.Dto
 {
     public class OrderDto
     {

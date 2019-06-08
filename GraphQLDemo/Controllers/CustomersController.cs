@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using WebApiDemo.Models;
-using WebApiDemo.Data;
+using GraphQLDemo.Models;
+using GraphQLDemo.Data;
 using AutoMapper;
-using WebApiDemo.Infrastructure;
-using WebApiDemo.Data.Entities;
+using GraphQLDemo.Infrastructure;
+using GraphQLDemo.Data.Entities;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using WebApiDemo.Data.Dto;
-using WebApiDemo.Data.Repositories;
+using GraphQLDemo.Data.Dto;
+using GraphQLDemo.Data.Repositories;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace WebApiDemo.Controllers
+namespace GraphQLDemo.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Route("api/customers")]

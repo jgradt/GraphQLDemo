@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApiDemo.Data.Dto;
-using WebApiDemo.Data.Repositories;
-using WebApiDemo.Models;
+using GraphQLDemo.Data.Dto;
+using GraphQLDemo.Data.Repositories;
+using GraphQLDemo.Models;
 
 namespace GraphQLDemo.Data.GraphQL
 {
@@ -58,7 +58,7 @@ namespace GraphQLDemo.Data.GraphQL
         }
     }
 
-    public class OrderStatusEnum : EnumerationGraphType<WebApiDemo.Data.Entities.OrderStatus>
+    public class OrderStatusEnum : EnumerationGraphType<GraphQLDemo.Data.Entities.OrderStatus>
     {
     }
 

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApiDemo.Infrastructure
+namespace GraphQLDemo.Infrastructure
 {
     public class ValidatorActionFilter : IActionFilter
     {

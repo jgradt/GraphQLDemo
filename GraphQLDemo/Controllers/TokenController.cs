@@ -4,10 +4,10 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using WebApiDemo.Data.Dto;
-using WebApiDemo.Infrastructure.Configuration;
+using GraphQLDemo.Data.Dto;
+using GraphQLDemo.Infrastructure.Configuration;
 
-namespace WebApiDemo.Controllers
+namespace GraphQLDemo.Controllers
 {
     [Route("api/token")]
     public class TokenController : Controller

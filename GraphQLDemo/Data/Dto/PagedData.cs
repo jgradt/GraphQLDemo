@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WebApiDemo.Data.Dto
+namespace GraphQLDemo.Data.Dto
 {
     public class PagedData<TData>
     {

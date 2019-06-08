@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using WebApiDemo.Data.Entities;
+using GraphQLDemo.Data.Entities;
 
-namespace WebApiDemo.Models
+namespace GraphQLDemo.Models
 {
     public class CustomerDto
     {

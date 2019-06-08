@@ -2,17 +2,17 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebApiDemo.Data;
+using GraphQLDemo.Data;
 using AutoMapper;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.EntityFrameworkCore;
-using WebApiDemo.Infrastructure;
+using GraphQLDemo.Infrastructure;
 using Microsoft.Extensions.Logging;
 using Microsoft.ApplicationInsights.Extensibility;
 using FluentValidation.AspNetCore;
-using WebApiDemo.Infrastructure.Configuration;
-using WebApiDemo.Data.Repositories;
-using WebApiDemo.Infrastructure.Errors;
+using GraphQLDemo.Infrastructure.Configuration;
+using GraphQLDemo.Data.Repositories;
+using GraphQLDemo.Infrastructure.Errors;
 using GraphiQl;
 using GraphQLDemo.Data.GraphQL;
 

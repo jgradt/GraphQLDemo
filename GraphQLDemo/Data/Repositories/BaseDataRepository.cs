@@ -2,12 +2,12 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using WebApiDemo.Data.Dto;
-using WebApiDemo.Infrastructure.Errors;
+using GraphQLDemo.Data.Dto;
+using GraphQLDemo.Infrastructure.Errors;
 using System;
 using System.Linq.Expressions;
 
-namespace WebApiDemo.Data.Repositories
+namespace GraphQLDemo.Data.Repositories
 {
     public interface IBaseDataRepository<TEntity> 
         where TEntity: class, IDataEntity

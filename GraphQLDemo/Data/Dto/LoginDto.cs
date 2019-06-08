@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApiDemo.Data.Dto
+namespace GraphQLDemo.Data.Dto
 {
     public class LoginDto
     {

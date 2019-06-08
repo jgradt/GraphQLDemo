@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using WebApiDemo.Data.Entities;
+using GraphQLDemo.Data.Entities;
 
-namespace WebApiDemo.Data
+namespace GraphQLDemo.Data
 {
     public static class DatabaseInitializer
     {

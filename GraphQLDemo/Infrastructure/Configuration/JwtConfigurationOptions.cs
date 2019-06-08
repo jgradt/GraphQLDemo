@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApiDemo.Infrastructure.Configuration
+namespace GraphQLDemo.Infrastructure.Configuration
 {
     public class JwtConfigurationOptions
     {

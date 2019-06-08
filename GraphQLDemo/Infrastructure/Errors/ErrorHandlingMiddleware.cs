@@ -9,7 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace WebApiDemo.Infrastructure.Errors
+namespace GraphQLDemo.Infrastructure.Errors
 {
     public class ErrorHandlingMiddleware
     {

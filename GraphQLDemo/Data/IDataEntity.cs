@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WebApiDemo.Data
+namespace GraphQLDemo.Data
 {
     public interface IDataEntity
     {

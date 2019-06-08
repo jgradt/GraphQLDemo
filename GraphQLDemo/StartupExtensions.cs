@@ -7,8 +7,8 @@ using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using System;
 using System.Text;
-using WebApiDemo.Data;
-using WebApiDemo.Infrastructure.Configuration;
+using GraphQLDemo.Data;
+using GraphQLDemo.Infrastructure.Configuration;
 
 namespace WebApiDemo
 {

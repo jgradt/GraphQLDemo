@@ -1,4 +1,4 @@
-﻿namespace WebApiDemo.Infrastructure.Configuration
+﻿namespace GraphQLDemo.Infrastructure.Configuration
 {
     public class AppSettings
     {
