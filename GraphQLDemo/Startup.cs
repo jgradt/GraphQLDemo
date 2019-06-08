@@ -68,7 +68,7 @@ namespace WebApiDemo
 
             //GraphQL types
             services.AddScoped<GraphQL.IDependencyResolver>(s => new GraphQL.FuncDependencyResolver(s.GetRequiredService));
-            services.AddScoped<GraphQL.Types.ISchema, QuerySchema>();
+            services.AddScoped<GraphQL.Types.ISchema, GraphQLQuerySchema>();
             services.AddGraphQL(x =>
             {
                 x.ExposeExceptions = true; 
