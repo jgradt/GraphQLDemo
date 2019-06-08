@@ -8,6 +8,8 @@ namespace GraphQLDemo.Data.Entities
         public int OrderId { get; set; }
         public int ProductId { get; set; }
         public int Quantity { get; set; }
+        public decimal UnitPrice { get; set; }
+        public decimal TotalPrice { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }
 

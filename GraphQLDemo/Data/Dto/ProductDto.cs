@@ -9,7 +9,7 @@ namespace GraphQLDemo.Data.Dto
         public int Id { get; set; }
         public string ProductName { get; set; }
         public int SupplierId { get; set; }
-        public int UnitPrice { get; set; }
+        public decimal UnitPrice { get; set; }
         public bool Discontinued { get; set; }
 
     }
@@ -35,6 +35,7 @@ namespace GraphQLDemo.Data.Dto
                 .ForSourceMember(m => m.CreatedDate, opt => opt.Ignore())
                 .ForSourceMember(m => m.LastUpdatedDate, opt => opt.Ignore())
                 .ForSourceMember(m => m.Supplier, opt => opt.Ignore())
+                .ForSourceMember(m => m.OrderDetails, opt => opt.Ignore())
                 .ReverseMap();
         }
 
