@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GraphQLDemo.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     [Route("graphql")]
     public class GraphQLController : Controller
     {
