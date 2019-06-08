@@ -16,7 +16,7 @@ namespace GraphQLDemo.Data.GraphQL
             Field(x => x.LastName);
             Field(x => x.Email);
 
-            FieldAsync<ListGraphType<OrderGraphType>>(
+            FieldAsync<ListGraphType<NonNullGraphType<OrderGraphType>>>(
               "orders",
 
               arguments: new QueryArguments(

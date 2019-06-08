@@ -6,7 +6,7 @@ namespace GraphQLDemo.Data.GraphQL
 {
     public class OrderGraphType : ObjectGraphType<Order>
     {
-        public OrderGraphType(ICustomerRepository customerRepository)
+        public OrderGraphType(ICustomerRepository customerRepository, IOrderDetailRepository orderDetailRepository)
         {
             Name = "Order";
 
@@ -17,7 +17,7 @@ namespace GraphQLDemo.Data.GraphQL
             Field(x => x.TotalDue);
             Field(x => x.Comment);
 
-            FieldAsync<CustomerGraphType>(
+            FieldAsync< NonNullGraphType<CustomerGraphType>>(
               "customer",
 
               resolve: async context =>
@@ -28,6 +28,23 @@ namespace GraphQLDemo.Data.GraphQL
                   var data = await customerRepository.GetByIdAsync(context.Source.CustomerId);
 
                   return data;
+              }
+            );
+
+            FieldAsync<NonNullGraphType<ListGraphType<NonNullGraphType<OrderDetailsGraphType>>>>(
+              "details",
+
+              arguments: new QueryArguments(
+                    new QueryArgument<IntGraphType> { Name = "count" }),
+
+              resolve: async context =>
+              {
+                  var numItems = context.GetArgument<int>("count");
+                  numItems = numItems > 0 ? numItems : 10;
+
+                  var data = await orderDetailRepository.GetPagedAsync(0, numItems, filter: o => o.OrderId == context.Source.Id);
+
+                  return data.Items;
               }
             );
         }

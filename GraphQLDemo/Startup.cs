@@ -64,6 +64,9 @@ namespace WebApiDemo
             //register types for DI
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ISupplierRepository, SupplierRepository>();
             services.AddSingleton<AppConfig, AppConfig>();
 
             //GraphQL types
