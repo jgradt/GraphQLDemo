@@ -1,19 +1,13 @@
-﻿using AutoMapper;
-using GraphQL;
+﻿using GraphQL;
 using GraphQL.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GraphQLDemo.Data.Dto;
 using GraphQLDemo.Data.Repositories;
-using GraphQLDemo.Models;
+using GraphQLDemo.Data.Entities;
 
 namespace GraphQLDemo.Data.GraphQL
 {
-    public class CustomerGraphType : ObjectGraphType<CustomerDto>
+    public class CustomerGraphType : ObjectGraphType<Customer>
     {
-        public CustomerGraphType(IMapper mapper, IOrderRepository orderRepository)
+        public CustomerGraphType(IOrderRepository orderRepository)
         {
             Name = "Customer";
 
@@ -34,15 +28,14 @@ namespace GraphQLDemo.Data.GraphQL
                   numItems = numItems > 0 ? numItems : 10;
 
                   var data = await orderRepository.GetPagedAsync(0, numItems, filter: o => o.CustomerId == context.Source.Id);
-                  var mappedData = mapper.Map<List<OrderDto>>(data.Items);
 
-                  return mappedData;
+                  return data.Items;
               }
             );
         }
     }
 
-    public class OrderGraphType : ObjectGraphType<OrderDto>
+    public class OrderGraphType : ObjectGraphType<Order>
     {
         public OrderGraphType()
         {
@@ -51,20 +44,19 @@ namespace GraphQLDemo.Data.GraphQL
             Field(x => x.Id, type: typeof(IdGraphType));
             Field(x => x.OrderDate);
             Field(x => x.DeliveredDate, nullable: true);
-            //TODO: status enum
-            //Field(x => x.Status, type: typeof(OrderStatusEnum));
+            Field<OrderStatusGraphType>(nameof(Order.Status));
             Field(x => x.TotalDue);
             Field(x => x.Comment);
         }
     }
 
-    public class OrderStatusEnum : EnumerationGraphType<GraphQLDemo.Data.Entities.OrderStatus>
+    public class OrderStatusGraphType : EnumerationGraphType<GraphQLDemo.Data.Entities.OrderStatus>
     {
     }
 
     public class GraphQLQuery : ObjectGraphType
     {
-        public GraphQLQuery(IMapper mapper, ICustomerRepository customerRepository, 
+        public GraphQLQuery(ICustomerRepository customerRepository, 
             IOrderRepository orderRepository)
         {
             FieldAsync<CustomerGraphType>(
@@ -78,9 +70,8 @@ namespace GraphQLDemo.Data.GraphQL
                   var id = context.GetArgument<int>("id");
 
                   var data = await customerRepository.GetByIdAsync(id);
-                  var mappedData = mapper.Map<CustomerDto>(data);
 
-                  return mappedData;
+                  return data;
               }
             );
 
@@ -95,9 +86,8 @@ namespace GraphQLDemo.Data.GraphQL
                   var id = context.GetArgument<int>("id");
 
                   var data = await orderRepository.GetByIdAsync(id);
-                  var mappedData = mapper.Map<OrderDto>(data);
 
-                  return mappedData;
+                  return data;
               }
             );
 
