@@ -61,15 +61,19 @@ namespace WebApiDemo
                 });
             });
 
-            //register types for DI
+            // ### Register types for DI ###
+
+            // general
+            services.AddSingleton<AppConfig, AppConfig>();
+
+            // repository types
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ISupplierRepository, SupplierRepository>();
-            services.AddSingleton<AppConfig, AppConfig>();
 
-            //GraphQL types
+            // GraphQL types
             services.AddScoped<GraphQL.IDependencyResolver>(s => new GraphQL.FuncDependencyResolver(s.GetRequiredService));
             services.AddScoped<GraphQL.Types.ISchema, GraphQLQuerySchema>();
             services.AddGraphQL(x =>

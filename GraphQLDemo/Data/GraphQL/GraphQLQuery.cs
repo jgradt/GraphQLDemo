@@ -1,4 +1,5 @@
-﻿using GraphQL.Types;
+﻿using GraphQL;
+using GraphQL.Types;
 using GraphQLDemo.Data.Repositories;
 
 namespace GraphQLDemo.Data.GraphQL
@@ -19,6 +20,10 @@ namespace GraphQLDemo.Data.GraphQL
               resolve: async context =>
               {
                   var id = context.GetArgument<int>("id");
+                  if (id <= 0)
+                  {
+                      throw new ExecutionError("valid id >= 0 is required");
+                  }
 
                   var data = await customerRepository.GetByIdAsync(id);
 
@@ -35,6 +40,10 @@ namespace GraphQLDemo.Data.GraphQL
               resolve: async context =>
               {
                   var id = context.GetArgument<int>("id");
+                  if (id <= 0)
+                  {
+                      throw new ExecutionError("valid id >= 0 is required");
+                  }
 
                   var data = await orderRepository.GetByIdAsync(id);
 
@@ -51,6 +60,10 @@ namespace GraphQLDemo.Data.GraphQL
               resolve: async context =>
               {
                   var id = context.GetArgument<int>("id");
+                  if (id <= 0)
+                  {
+                      throw new ExecutionError("valid id >= 0 is required");
+                  }
 
                   var data = await productRepository.GetByIdAsync(id);
 
@@ -67,6 +80,10 @@ namespace GraphQLDemo.Data.GraphQL
               resolve: async context =>
               {
                   var id = context.GetArgument<int>("id");
+                  if (id <= 0)
+                  {
+                      throw new ExecutionError("valid id >= 0 is required");
+                  }
 
                   var data = await supplierRepository.GetByIdAsync(id);
 

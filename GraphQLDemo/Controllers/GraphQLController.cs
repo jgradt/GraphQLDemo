@@ -7,6 +7,8 @@ using GraphQL.Types;
 using GraphQLDemo.Data.GraphQL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace GraphQLDemo.Controllers
 {
@@ -15,10 +17,12 @@ namespace GraphQLDemo.Controllers
     public class GraphQLController : Controller
     {
         private ISchema _schema;
+        private ILogger<GraphQLController> _log;
 
-        public GraphQLController(ISchema schema)
+        public GraphQLController(ISchema schema, ILogger<GraphQLController> log)
         {
             _schema = schema;
+            _log = log;
         }
 
         public async Task<IActionResult> Post([FromBody] GraphQLRequest queryRequest)
@@ -29,13 +33,15 @@ namespace GraphQLDemo.Controllers
                 _.Schema = _schema;
                 _.Query = queryRequest.Query;
                 _.OperationName = queryRequest.OperationName;
-                _.UserContext = new GraphQLUserContext();
+                _.UserContext = new GraphQLUserContext(User);
                 _.Inputs = queryRequest.Variables.ToInputs();
             });
 
             if (result.Errors?.Count > 0)
             {
-                return BadRequest();
+                _log.LogError($"GraphQL Request {JsonConvert.SerializeObject(queryRequest)}");
+                _log.LogError($"Error(s) processing GraphQL request: {JsonConvert.SerializeObject(result.Errors.Select(e => e.Message))}");
+                return BadRequest(result);
             }
 
             return Ok(result);
