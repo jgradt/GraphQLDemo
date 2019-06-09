@@ -14,7 +14,7 @@ using GraphQLDemo.Data.Repositories;
 
 namespace GraphQLDemo.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     [Route("api/customers")]
     public class CustomersController : Controller
     {
