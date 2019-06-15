@@ -22,7 +22,8 @@ namespace GraphQLDemo.Data.GraphQL
                   var id = context.GetArgument<int>("id");
                   if (id <= 0)
                   {
-                      throw new ExecutionError("valid id >= 0 is required");
+                      context.Errors.Add(new ExecutionError("valid id >= 0 is required"));
+                      return null;
                   }
 
                   var data = await customerRepository.GetByIdAsync(id);
@@ -42,7 +43,8 @@ namespace GraphQLDemo.Data.GraphQL
                   var id = context.GetArgument<int>("id");
                   if (id <= 0)
                   {
-                      throw new ExecutionError("valid id >= 0 is required");
+                      context.Errors.Add(new ExecutionError("valid id >= 0 is required"));
+                      return null;
                   }
 
                   var data = await orderRepository.GetByIdAsync(id);
@@ -62,7 +64,8 @@ namespace GraphQLDemo.Data.GraphQL
                   var id = context.GetArgument<int>("id");
                   if (id <= 0)
                   {
-                      throw new ExecutionError("valid id >= 0 is required");
+                      context.Errors.Add(new ExecutionError("valid id >= 0 is required"));
+                      return null;
                   }
 
                   var data = await productRepository.GetByIdAsync(id);
@@ -82,7 +85,8 @@ namespace GraphQLDemo.Data.GraphQL
                   var id = context.GetArgument<int>("id");
                   if (id <= 0)
                   {
-                      throw new ExecutionError("valid id >= 0 is required");
+                      context.Errors.Add(new ExecutionError("valid id >= 0 is required"));
+                      return null;
                   }
 
                   var data = await supplierRepository.GetByIdAsync(id);
