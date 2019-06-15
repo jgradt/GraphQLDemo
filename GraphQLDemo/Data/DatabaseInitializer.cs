@@ -1,4 +1,6 @@
-﻿using FizzWare.NBuilder;
+﻿// see also: https://www.jerriepelser.com/blog/creating-test-data-with-nbuilder-and-faker/
+
+using FizzWare.NBuilder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +14,6 @@ namespace GraphQLDemo.Data
 
         public static void AddDatabaseSeedData(DemoDbContext dbContext)
         {
-            // see also: https://www.jerriepelser.com/blog/creating-test-data-with-nbuilder-and-faker/
-
-
             // customers
             List<Customer> customerList = new List<Customer>();
 
@@ -117,7 +116,7 @@ namespace GraphQLDemo.Data
 
                 foreach (var order in orderList)
                 {
-                    var detail = Pick<OrderDetail>.RandomItemFrom(orderDetailsList);
+                    var detail = Pick<OrderDetail>.RandomItemFrom(unassignedOrderDetails);
                     order.Details = new List<OrderDetail>();
                     order.Details.Add(detail);
                     unassignedOrderDetails.Remove(detail);
@@ -129,23 +128,37 @@ namespace GraphQLDemo.Data
                     order.Details.Add(od);
                 }
 
-                foreach(var od in orderDetailsList)
-                {
-                    od.UnitPrice = od.Product.UnitPrice;
-                    od.TotalPrice = od.Product.UnitPrice * od.Quantity;
-                }
-
-                foreach (var order in orderList)
-                {
-                    order.TotalDue = order.Details.Sum(od => od.TotalPrice);
-                }
-
-                Debug.Assert(orderList.All(o => o.Details?.Count() > 0));
-
                 dbContext.OrderDetails.AddRange(orderDetailsList);
             }
 
             dbContext.SaveChanges();
+
+            foreach (var od in dbContext.OrderDetails)
+            {
+                od.UnitPrice = od.Product.UnitPrice;
+                od.TotalPrice = od.Product.UnitPrice * od.Quantity;
+            }
+
+            foreach (var order in dbContext.Orders)
+            {
+                order.TotalDue = order.Details.Sum(od => od.TotalPrice);
+            }
+
+            dbContext.SaveChanges();
+            
+            // validate data
+            Debug.Assert(dbContext.Customers.All(o => o.Orders.Count() > 0));
+
+            Debug.Assert(dbContext.Orders.All(o => o.Customer != null));
+            Debug.Assert(dbContext.Orders.All(o => o.Details.Count() > 0));
+            Debug.Assert(dbContext.Orders.All(o => o.TotalDue == o.Details.Sum(od => od.TotalPrice)));
+
+            Debug.Assert(dbContext.OrderDetails.All(o => o.Order != null));
+            Debug.Assert(dbContext.OrderDetails.All(o => o.Product != null));
+
+            Debug.Assert(dbContext.Products.All(o => o.Supplier != null));
+
+            Debug.Assert(dbContext.Suppliers.All(o => o.Products.Count() > 0));
         }
     }
 }
