@@ -95,6 +95,73 @@ namespace GraphQLDemo.Data.GraphQL
               }
             );
 
+            FieldAsync<ListGraphType<NonNullGraphType<CustomerGraphType>>>(
+              "getCustomers",
+
+              arguments: new QueryArguments(
+                    new QueryArgument<IdGraphType> { Name = "limit" }),
+
+              resolve: async context =>
+              {
+                  var numItems = context.GetArgument<int>("limit");
+                  numItems = numItems > 0 ? numItems : 10;
+
+                  var data = await customerRepository.GetPagedAsync(0, numItems);
+
+                  return data.Items;
+              }
+            );
+
+            FieldAsync<ListGraphType<NonNullGraphType<OrderGraphType>>>(
+              "getOrders",
+
+              arguments: new QueryArguments(
+                    new QueryArgument<IdGraphType> { Name = "limit" }),
+
+              resolve: async context =>
+              {
+                  var numItems = context.GetArgument<int>("limit");
+                  numItems = numItems > 0 ? numItems : 10;
+
+                  var data = await orderRepository.GetPagedAsync(0, numItems);
+
+                  return data.Items;
+              }
+            );
+
+            FieldAsync<ListGraphType<NonNullGraphType<ProductGraphType>>>(
+              "getProducts",
+
+              arguments: new QueryArguments(
+                    new QueryArgument<IdGraphType> { Name = "limit" }),
+
+              resolve: async context =>
+              {
+                  var numItems = context.GetArgument<int>("limit");
+                  numItems = numItems > 0 ? numItems : 10;
+
+                  var data = await productRepository.GetPagedAsync(0, numItems);
+
+                  return data.Items;
+              }
+            );
+
+            FieldAsync<ListGraphType<NonNullGraphType<SupplierGraphType>>>(
+              "getSuppliers",
+
+              arguments: new QueryArguments(
+                    new QueryArgument<IdGraphType> { Name = "limit" }),
+
+              resolve: async context =>
+              {
+                  var numItems = context.GetArgument<int>("limit");
+                  numItems = numItems > 0 ? numItems : 10;
+
+                  var data = await supplierRepository.GetPagedAsync(0, numItems);
+
+                  return data.Items;
+              }
+            );
         }
     }
 
