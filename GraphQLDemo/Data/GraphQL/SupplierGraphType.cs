@@ -25,7 +25,7 @@ namespace GraphQLDemo.Data.GraphQL
 
               resolve: async context =>
               {
-                  var numItems = context.GetArgument<int>("count");
+                  var numItems = context.GetArgument<int>("limit");
                   numItems = numItems > 0 ? numItems : 10;
 
                   var data = await productRepository.GetPagedAsync(0, numItems, filter: o => o.SupplierId == context.Source.Id);
